@@ -1,6 +1,6 @@
 import { parseCookies } from "nookies";
 
-const baseUrl = `https://localhost:3001`;
+const baseUrl = import.meta.env.VITE_API_URL || `https://localhost:3001`;
 
 export const APIRoutes = {
   baseUrl,
