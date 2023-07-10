@@ -10,6 +10,8 @@ import {
   FormLabel,
 } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
+import { useContext } from "react";
+import { AuthContext } from "@/context";
 
 const loginProps = {
   title: "Faz a Boa PDV",
@@ -31,6 +33,8 @@ const formSchema = z.object({
 type User = z.infer<typeof formSchema>;
 
 const Login = () => {
+  const { signIn } = useContext(AuthContext);
+
   const form = useForm<User>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -39,9 +43,10 @@ const Login = () => {
     },
   });
 
-  const onSubmit = (values: User) => {
-    // TODO: fetch login route
-    console.log(values);
+  const onSubmit = (data: User) => {
+    signIn(data).catch((error) => {
+      console.error(error);
+    });
   };
 
   return (
