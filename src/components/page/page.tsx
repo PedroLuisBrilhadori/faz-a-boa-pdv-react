@@ -4,14 +4,15 @@ import { DrawerProvider } from "@/context/drawer";
 
 export type PageProps = {
   children: ReactNode;
-  align: "start" | "center" | "baseline" | "stretch" | "end";
+  align?: "start" | "center" | "baseline" | "stretch" | "end";
+  className?: string;
 };
 
-export const Page = ({ children, align }: PageProps) => {
+export const Page = ({ children, align, className }: PageProps) => {
   const alignment = `items-${align || "center"}`;
 
   return (
-    <div className={`flex flex-col gap-2 w-full ${alignment}`}>
+    <div className={`flex flex-col gap-2 w-full ${alignment} ${className}`}>
       <div className="w-full">
         <DrawerProvider>
           <Navbar />

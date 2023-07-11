@@ -92,12 +92,12 @@ export const columns = (isAdmin: boolean): ColumnDef<Product>[] => [
   },
 ];
 
-export function TableProducts() {
+export type TableProductsProps = {
+  isAdmin: boolean;
+};
+
+export function TableProducts({ isAdmin }: TableProductsProps) {
   const { data } = useProducts();
-
-  const { user } = useContext(AuthContext);
-
-  const isAdmin = user?.role === "admin";
 
   return (
     <ScrollArea className="sm:w-max-sm overflow-auto">
