@@ -1,6 +1,8 @@
 import { Page, TableProducts } from "@/components";
+import { AuthContext } from "@/context";
+import { useContext } from "react";
 
-const Compras = () => {
+const Products = () => {
   return (
     <Page align="center">
       <h1>Lista de Produtos</h1>
@@ -14,4 +16,4 @@ const Compras = () => {
   );
 };
 
-export default Compras;
+export default Products;
