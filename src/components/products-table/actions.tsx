@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { MoreHorizontal, Pen, Trash } from "lucide-react";
-import { Product } from "./table";
+import { Product, deleteProduct } from "@/services";
 
 export type ActionsProps = {
   isAdmin: boolean;
@@ -60,7 +60,13 @@ export const AdminOptions = ({ product }: ActionsProps) => {
       <DropdownMenuItem
         className="text-destructive"
         onClick={() => {
-          console.log(product);
+          deleteProduct(product)
+            .then((data) => {
+              console.log("Produto deletado");
+            })
+            .catch((error) => {
+              console.log(error);
+            });
         }}
       >
         <Trash className="mr-2 h-4 w-4" />

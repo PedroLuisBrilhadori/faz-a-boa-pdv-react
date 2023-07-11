@@ -8,16 +8,8 @@ import { DataTable } from "../data-table";
 import { Button } from "../ui/button";
 import { ArrowUpDown } from "lucide-react";
 
-import { AuthContext } from "@/context";
-import { useContext } from "react";
 import { ActionsRow } from "./actions";
-
-export type Product = {
-  name: string;
-  inventory: string;
-  price: string;
-  unit: string;
-};
+import { Product } from "@/services";
 
 export const columns = (isAdmin: boolean): ColumnDef<Product>[] => [
   {

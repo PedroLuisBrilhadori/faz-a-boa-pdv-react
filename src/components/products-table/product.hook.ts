@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Product } from "./table";
-import { APIRoutes } from "@/services";
+import { APIRoutes, Product } from "@/services";
 import { useToast } from "../ui/use-toast";
 
 export const getProducts = async () => {
