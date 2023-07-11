@@ -92,8 +92,8 @@ export function TableProducts({ isAdmin }: TableProductsProps) {
   const { data } = useProducts();
 
   return (
-    <ScrollArea className="sm:w-max-sm overflow-auto">
-      <div className="rounded-md border overflow-auto w-80 md:w-full h-[500px]">
+    <ScrollArea className="sm:w-max-sm">
+      <div className="rounded-md border w-80 md:w-full h-[450px]">
         <DataTable data={data ?? []} columns={columns(isAdmin)}></DataTable>
       </div>
     </ScrollArea>
