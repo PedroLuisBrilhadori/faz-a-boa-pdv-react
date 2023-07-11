@@ -8,6 +8,7 @@ export type Path =
   | `/compra`
   | `/historico`
   | `/login`
+  | `/produtos`
 
 export type Params = {
   
