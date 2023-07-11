@@ -7,6 +7,7 @@ import { useToast } from "@/components/ui/use-toast";
 type User = {
   name: string;
   email: string;
+  role: "admin" | "user";
 };
 
 type SignInData = {
@@ -23,6 +24,16 @@ type AuthContextType = {
 
 export const AuthContext = createContext({} as AuthContextType);
 
+const fetchUser = async (token: string) => {
+  headers.append("Authorization", `Bearer ${token}`);
+
+  const response = await fetch(APIRoutes.userByToken, { headers });
+
+  if (response.status !== 200) throw new Error();
+
+  return response.json();
+};
+
 export function AuthProvider({ children }: any) {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
@@ -37,6 +48,10 @@ export function AuthProvider({ children }: any) {
 
     if (!token) {
       navigate("/login");
+    } else {
+      fetchUser(token).then((user) => {
+        setUser(user);
+      });
     }
   }, []);
 
