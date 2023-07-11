@@ -45,7 +45,7 @@ export const Navbar = () => {
       <Drawer {...drawerConfig} />
 
       <NavbarAvatar>
-        <Avatar>
+        <Avatar className="cursor-pointer">
           <AvatarImage
             src="https://github.com/pedroluisbrilhadori.png"
             alt="@shadcn"
