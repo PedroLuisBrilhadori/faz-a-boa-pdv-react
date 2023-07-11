@@ -4,6 +4,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { DrawerProps, Drawer } from "../drawer";
 import { DrawerCtx, DrawerContext } from "@/context/drawer";
 import { useContext } from "react";
+import { NavbarAvatar } from "./avatar";
 
 export const Navbar = () => {
   const context = useContext(DrawerContext);
@@ -43,13 +44,15 @@ export const Navbar = () => {
     <div className="flex justify-between p-2 border-b-2">
       <Drawer {...drawerConfig} />
 
-      <Avatar>
-        <AvatarImage
-          src="https://github.com/pedroluisbrilhadori.png"
-          alt="@shadcn"
-        />
-        <AvatarFallback>CN</AvatarFallback>
-      </Avatar>
+      <NavbarAvatar>
+        <Avatar>
+          <AvatarImage
+            src="https://github.com/pedroluisbrilhadori.png"
+            alt="@shadcn"
+          />
+          <AvatarFallback>CN</AvatarFallback>
+        </Avatar>
+      </NavbarAvatar>
     </div>
   );
 };

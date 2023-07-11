@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { parseCookies, setCookie } from "nookies";
+import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { APIRoutes, headers } from "@/services";
 import { useNavigate } from "@/router";
 
@@ -17,6 +17,7 @@ type AuthContextType = {
   isAuthenticated: boolean;
   user: User | null;
   signIn: (data: SignInData) => Promise<void>;
+  signOut: () => Promise<void>;
 };
 
 export const AuthContext = createContext({} as AuthContextType);
@@ -63,8 +64,16 @@ export function AuthProvider({ children }: any) {
     navigate("/");
   }
 
+  const signOut = async () => {
+    destroyCookie(null, "nextauth.token");
+
+    setUser(null);
+
+    navigate("/login");
+  };
+
   return (
-    <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
+    <AuthContext.Provider value={{ user, isAuthenticated, signIn, signOut }}>
       {children}
     </AuthContext.Provider>
   );
