@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { destroyCookie, parseCookies, setCookie } from "nookies";
 import { APIRoutes, headers } from "@/services";
 import { useNavigate } from "@/router";
+import { useToast } from "@/components/ui/use-toast";
 
 type User = {
   name: string;
@@ -25,6 +26,7 @@ export const AuthContext = createContext({} as AuthContextType);
 export function AuthProvider({ children }: any) {
   const [user, setUser] = useState<User | null>(null);
   const navigate = useNavigate();
+  const { toast } = useToast();
 
   const isAuthenticated = !!user;
 
@@ -48,10 +50,22 @@ export function AuthProvider({ children }: any) {
       }),
     });
 
-    const { token, user, message } = await request.json();
+    const { token, user } = await request.json();
 
-    // TODO: show alert errors
-    if (!token) throw new Error(message);
+    if (!token) {
+      const description =
+        request.status !== 401
+          ? "Erro desconhecido. Por favor tente novamente mais tarde"
+          : "Email ou senha incorreto.";
+
+      toast({
+        title: "Erro no Login",
+        description,
+        variant: "destructive",
+      });
+
+      return;
+    }
 
     setCookie(undefined, "nextauth.token", token, {
       maxAge: 60 * 60 * 1, // 1 hour
