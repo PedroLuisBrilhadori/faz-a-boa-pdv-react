@@ -81,6 +81,9 @@ export const AddProductForm = () => {
                 <FormControl>
                   <Input
                     type="number"
+                    step="0.01"
+                    pattern="\d*"
+                    inputMode="decimal"
                     value={field.value}
                     onChange={(value) => {
                       field.onChange(Number(value.target.value));
@@ -100,6 +103,9 @@ export const AddProductForm = () => {
                 <FormControl>
                   <Input
                     type="number"
+                    step="any"
+                    pattern="\d*"
+                    inputMode="decimal"
                     value={field.value}
                     onChange={(value) => {
                       field.onChange(Number(value.target.value));
