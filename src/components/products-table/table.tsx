@@ -21,7 +21,7 @@ export type Product = {
   name: string;
   inventory: string;
   price: string;
-  unit: boolean;
+  unit: string;
 };
 
 export const columns: ColumnDef<Product>[] = [
@@ -101,7 +101,7 @@ export const columns: ColumnDef<Product>[] = [
     accessorKey: "unit",
     header: () => <div className="text-right">Unidade</div>,
     cell: ({ row }) => {
-      const unit = parseFloat(row.getValue("unit"));
+      const unit = row.getValue("unit");
 
       const formatted = unit ? "Unidade" : "Kg";
 
@@ -112,10 +112,10 @@ export const columns: ColumnDef<Product>[] = [
     accessorKey: "inventory",
     header: () => <div className="text-right">Estoque</div>,
     cell: ({ row }) => {
-      const unit = parseFloat(row.getValue("unit"));
+      const unit = row.getValue("unit");
       const inventory = parseFloat(row.getValue("inventory"));
 
-      const formatted = unit ? "Unidades" : "Kg";
+      const formatted = unit ? "Un." : "Kg";
 
       return (
         <div className="text-right font-medium">{`${inventory} ${formatted}`}</div>
