@@ -25,6 +25,8 @@ type AuthContextType = {
 export const AuthContext = createContext({} as AuthContextType);
 
 const fetchUser = async (token: string) => {
+  const headers = new Headers();
+
   headers.append("Authorization", `Bearer ${token}`);
 
   const response = await fetch(APIRoutes.userByToken, { headers });
