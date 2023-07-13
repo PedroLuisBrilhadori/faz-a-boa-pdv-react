@@ -46,8 +46,6 @@ export function AuthProvider({ children }: any) {
   useEffect(() => {
     const { "nextauth.token": token } = parseCookies();
 
-    // TODO: add get user function
-
     if (!token) {
       navigate("/login");
     } else {

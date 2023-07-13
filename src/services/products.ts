@@ -24,6 +24,16 @@ const headerToken = () => {
   return { headers, token };
 };
 
+export const getProducts = async () => {
+  const result = await fetch(`${APIRoutes.products}?max=10000&page=1`);
+
+  if (result.status !== 200) throw new Error();
+
+  const { data } = await result.json();
+
+  return data as Product[];
+};
+
 export const createProduct = async (product: Product) => {
   const { headers } = headerToken();
   const body = JSON.stringify(product);
@@ -36,7 +46,9 @@ export const createProduct = async (product: Product) => {
 
   if (response.status !== 201) throw new Error("Produto não criado");
 
-  return response.json();
+  const { data } = await response.json();
+
+  return data as Product;
 };
 
 export const deleteProduct = async (product: Product) => {
@@ -49,5 +61,5 @@ export const deleteProduct = async (product: Product) => {
 
   if (response.status !== 200) throw new Error("Produto não excluido");
 
-  return response.json();
+  await response.json();
 };

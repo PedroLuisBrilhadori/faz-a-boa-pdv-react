@@ -11,8 +11,10 @@ import {
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { AlertDialogCancel } from "@/components/ui/alert-dialog";
-import { Product, createProduct, productSchema } from "@/services";
+import { Product, productSchema } from "@/services";
 import { useToast } from "@/components/ui/use-toast";
+import { useContext } from "react";
+import { ProductContext } from "@/context/products";
 
 const productProps = {
   inputs: {
@@ -31,16 +33,18 @@ export const AddProductForm = () => {
       name: "",
       price: 0,
       unit: false,
-      inventory: 0,
       active: true,
+      inventory: 0,
     },
   });
 
   const { toast } = useToast();
 
+  const { createProduct } = useContext(ProductContext);
+
   const onSubmit = (data: Product) => {
     createProduct(data)
-      .then(({ data }) => {
+      .then((data) => {
         toast({
           title: `${data.name} Criado!`,
           description: `Produto criado com sucesso!`,
@@ -86,7 +90,10 @@ export const AddProductForm = () => {
                     inputMode="decimal"
                     value={field.value}
                     onChange={(value) => {
-                      field.onChange(Number(value.target.value));
+                      const number = Number(value.target.value);
+
+                      // @ts-ignore
+                      field.onChange(!number ? null : number);
                     }}
                   />
                 </FormControl>
@@ -108,7 +115,10 @@ export const AddProductForm = () => {
                     inputMode="decimal"
                     value={field.value}
                     onChange={(value) => {
-                      field.onChange(Number(value.target.value));
+                      const number = Number(value.target.value);
+
+                      // @ts-ignore
+                      field.onChange(!number ? null : number);
                     }}
                   />
                 </FormControl>

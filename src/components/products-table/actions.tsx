@@ -8,7 +8,9 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Button } from "../ui/button";
 import { MoreHorizontal, Pen, Trash } from "lucide-react";
-import { Product, deleteProduct } from "@/services";
+import { Product } from "@/services";
+import { useContext } from "react";
+import { ProductContext } from "@/context/products";
 
 export type ActionsProps = {
   isAdmin: boolean;
@@ -41,6 +43,8 @@ export const ActionsRow = ({ product, isAdmin }: ActionsProps) => {
 };
 
 export const AdminOptions = ({ product }: ActionsProps) => {
+  const { deleteProduct } = useContext(ProductContext);
+
   return (
     <div>
       <DropdownMenuSeparator />

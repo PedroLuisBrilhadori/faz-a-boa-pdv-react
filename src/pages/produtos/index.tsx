@@ -2,6 +2,7 @@ import { Page, TableProducts } from "@/components";
 import { AuthContext } from "@/context";
 import { useContext } from "react";
 import { AddProduct } from "./_components";
+import { ProductProvider } from "@/context/products";
 
 const Products = () => {
   const { user } = useContext(AuthContext);
@@ -9,17 +10,19 @@ const Products = () => {
   const isAdmin = user?.role === "admin";
 
   return (
-    <Page align="center" className="gap-6">
-      <h1>Lista de Produtos</h1>
+    <ProductProvider>
+      <Page align="center" className="gap-6">
+        <h1>Lista de Produtos</h1>
 
-      <AddProduct />
+        <AddProduct />
 
-      <div className="flex flex-col gap-5">
-        <div>
-          <TableProducts {...{ isAdmin }} />
+        <div className="flex flex-col gap-5">
+          <div>
+            <TableProducts {...{ isAdmin }} />
+          </div>
         </div>
-      </div>
-    </Page>
+      </Page>
+    </ProductProvider>
   );
 };
 

@@ -3,13 +3,14 @@
 import { ColumnDef } from "@tanstack/react-table";
 import { ScrollArea } from "@/components/ui/scroll-area";
 
-import { useProducts } from "./product.hook";
 import { DataTable } from "../data-table";
 import { Button } from "../ui/button";
 import { ArrowUpDown } from "lucide-react";
 
 import { ActionsRow } from "./actions";
 import { Product } from "@/services";
+import { useContext } from "react";
+import { ProductContext } from "@/context/products";
 
 export const columns = (isAdmin: boolean): ColumnDef<Product>[] => [
   {
@@ -89,12 +90,12 @@ export type TableProductsProps = {
 };
 
 export function TableProducts({ isAdmin }: TableProductsProps) {
-  const { data } = useProducts();
+  const { products } = useContext(ProductContext);
 
   return (
     <ScrollArea className="sm:w-max-sm">
       <div className="rounded-md border w-80 md:w-full h-[450px]">
-        <DataTable data={data ?? []} columns={columns(isAdmin)}></DataTable>
+        <DataTable data={products ?? []} columns={columns(isAdmin)}></DataTable>
       </div>
     </ScrollArea>
   );
